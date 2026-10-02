@@ -1,0 +1,276 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: black;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+header {
+    height: 45px;
+    background: #092f55;
+    border-top: 3px solid #d5b329;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+}
+
+header p {
+    margin: 0;
+    font-size: 14px;
+}
+
+header img {
+    width: 55px;
+    height: 35px;
+    object-fit: contain;
+}
+nav {
+    height: 60px;
+    background: white;
+    border-bottom: 3px solid #d5b329;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 0 20px;
+}
+
+nav img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
+
+nav a,
+nav span {
+    color: black;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+nav span {
+    margin-left: auto;
+}
+
+.home {
+    background: linear-gradient(#111044, #3030c5, #050515);
+}
+.slideshow {
+    position: relative;
+    width: 90%;
+    height: 500px;
+    margin: auto;
+    overflow: hidden;
+    background: #092f55;
+}
+
+.slideshow img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.5s;
+}
+
+.timer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: white;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title h2 {
+    margin: 0;
+    font-size: 26px;
+}
+
+.title img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
+#matches {
+    height: 430px;
+    padding: 25px 4%;
+}
+
+.next {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.next h3 {
+    margin: 0 0 10px;
+    font-size: 15px;
+}
+
+.next b {
+    display: block;
+    font-size: 24px;
+}
+
+.next small {
+    font-size: 10px;
+}
+
+.match-boxes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+    margin-top: 30px;
+}
+
+.match-boxes button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.match-boxes div {
+    width: 25%;
+    height: 140px;
+    background: #092f55;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.match-boxes div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.match-boxes .middle {
+    border: 2px solid white;
+}
+#record {
+    padding: 30px 2%;
+    background: black;
+}
+
+.record-boxes {
+    display: flex;
+    gap: 5%;
+    margin-top: 15px;
+}
+
+.record-boxes div {
+    height: 400px;
+    background: #092f55;
+    border: 2px solid white;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.record-boxes div:first-child {
+    width: 60%;
+}
+
+.record-boxes div:last-child {
+    width: 35%;
+}
+#players {
+    padding: 20px 2% 40px;
+    background: black;
+}
+
+.title button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.players {
+    display: flex;
+    gap: 25px;
+    margin-top: 15px;
+}
+
+.player {
+    width: 33.33%;
+    height: 400px;
+    background: #092f55;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.player img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.playerInfo {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background: rgba(0, 0, 0, .75);
+    opacity: 0;
+    transition: .3s;
+}
+
+.player:hover .playerInfo {
+    opacity: 1;
+}
+
+.playerInfo p {
+    margin: 4px;
+}
+
+#media {
+    padding: 25px 3% 50px;
+    background: linear-gradient(#050515, #3030c5);
+}
+
+.media {
+    display: flex;
+    gap: 25px;
+    margin-top: 15px;
+}
+
+.media div {
+    height: 380px;
+    background: #092f55;
+    border: 2px solid white;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.media div:first-child {
+    width: 65%;
+}
+
+.media div:last-child {
+    width: 35%;
+}
+
+.media div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
