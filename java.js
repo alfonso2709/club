@@ -1,214 +1,219 @@
-let homeImages = [
-    "images/home1.jpg",
-    "images/home2.jpg",
-    "images/home3.jpg"
-];
+let homeNumber = 1;
 
-let homeNumber = 0;
-let homeImage = document.getElementById("homeImage");
-let timer = document.querySelector(".timer");
-
-function nextHomeImage() {
-
-    homeNumber++;
-
-    if (homeNumber == homeImages.length) {
-        homeNumber = 0;
-    }
-
-    homeImage.style.opacity = "0";
-
-    setTimeout(function() {
-        homeImage.src = homeImages[homeNumber];
-        homeImage.style.opacity = "1";
-    }, 500);
+function showHome() {
+    document.getElementById("home").src = "home" + homeNumber + ".png";
 }
 
-setInterval(nextHomeImage, 5000);
-
 setInterval(function() {
+    homeNumber++;
 
-    timer.style.width = "0%";
+    if (homeNumber > 3) {
+        homeNumber = 1;
+    }
 
-    setTimeout(function() {
-        timer.style.width = "100%";
-    }, 50);
+    showHome();
+}, 3000);
 
-}, 5000);
 
-timer.style.transition = "width 5s linear";
-timer.style.width = "100%";
+let matches = [
+    ["Wed, 9/2", "FREEHOLD BORO", "Howell", "0 - 5", "L"],
+    ["Tue, 9/8", "FREEHOLD BORO", "Asbury Park", "3 - 0", "W"],
+    ["Thu, 9/10", "FREEHOLD BORO", "Firebirds", "3 - 1", "W"],
+    ["Mon, 9/14", "FREEHOLD BORO", "Raritan", "3 - 0", "W"],
+    ["Wed, 9/16", "FREEHOLD BORO", "Middletown North", "2 - 1", "W"],
+    ["Sat, 9/19", "FREEHOLD BORO", "Brick Memorial", "4 - 1", "W"],
+    ["Tue, 9/22", "FREEHOLD BORO", "Rumson-Fair Haven", "2 - 3", "L"],
+    ["Fri, 9/26", "FREEHOLD BORO", "Seneca", "2 - 3", "L"],
+    ["Wed, 9/30", "FREEHOLD BORO", "Wall", "1 - 3", "L"],
+    ["Sat, 10/3", "FREEHOLD BORO", "Toms River South", "0 - 1", "L"],
 
-let matchDate = new Date("October 10, 2026 19:00:00").getTime();
+    ["Tue, 10/6", "FREEHOLD BORO", "Marlboro", "4:00 PM", "UPCOMING"],
+    ["Thu, 10/8", "FREEHOLD BORO", "Red Bank Regional", "6:30 PM", "UPCOMING"],
+    ["Sat, 10/10", "FREEHOLD BORO", "St. Rose", "9:00 AM", "UPCOMING"],
+    ["Thu, 10/14", "FREEHOLD BORO", "Manchester Township", "3:45 PM", "UPCOMING"],
+    ["Thu, 10/22", "FREEHOLD BORO", "Lacey", "4:00 PM", "UPCOMING"],
+    ["Sat, 10/24", "FREEHOLD BORO", "Freehold Township", "10:00 AM", "UPCOMING"]
+];
+
+let matchNumber = 10;
+
+function showMatch(number, side) {
+
+    if (number >= 0 && number < matches.length) {
+        document.getElementById(side + "Date").textContent = matches[number][0];
+        document.getElementById(side + "Team").textContent =
+            matches[number][1] + " vs " + matches[number][2];
+        document.getElementById(side + "Score").textContent = matches[number][3];
+        document.getElementById(side + "Result").textContent = matches[number][4];
+    }
+}
+
+function showMatches() {
+    showMatch(matchNumber - 1, "left");
+    showMatch(matchNumber, "main");
+    showMatch(matchNumber + 1, "right");
+}
+
+function nextMatch() {
+    if (matchNumber < matches.length - 1) {
+        matchNumber++;
+        showMatches();
+    }
+}
+
+function previousMatch() {
+    if (matchNumber > 0) {
+        matchNumber--;
+        showMatches();
+    }
+}
+
+showMatches();
+
+
+let matchDate = new Date("October 6, 2026 16:00:00").getTime();
 
 function countdown() {
 
     let now = new Date().getTime();
-    let difference = matchDate - now;
+    let time = matchDate - now;
 
-    let days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    let hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-    let minutes = Math.floor((difference / (1000 * 60)) % 60);
-    let seconds = Math.floor((difference / 1000) % 60);
+    if (time <= 0) {
+        document.getElementById("days").innerHTML = "00<br><small>DAYS</small>";
+        document.getElementById("hours").innerHTML = "00<br><small>HRS</small>";
+        document.getElementById("minutes").innerHTML = "00<br><small>MIN</small>";
+        document.getElementById("seconds").innerHTML = "00<br><small>SEC</small>";
+        return;
+    }
 
-    document.getElementById("countdown").textContent =
-        days + " : " +
-        hours + " : " +
-        minutes + " : " +
-        seconds;
+    let days = Math.floor(time / (1000 * 60 * 60 * 24));
+    let hours = Math.floor(time / (1000 * 60 * 60) % 24);
+    let minutes = Math.floor(time / (1000 * 60) % 60);
+    let seconds = Math.floor(time / 1000 % 60);
+
+    document.getElementById("days").innerHTML =
+        days + "<br><small>DAYS</small>";
+
+    document.getElementById("hours").innerHTML =
+        hours + "<br><small>HRS</small>";
+
+    document.getElementById("minutes").innerHTML =
+        minutes + "<br><small>MIN</small>";
+
+    document.getElementById("seconds").innerHTML =
+        seconds + "<br><small>SEC</small>";
 }
 
 countdown();
 setInterval(countdown, 1000);
 
-let matches = [
-    "images/match1.jpg",
-    "images/match2.jpg",
-    "images/match3.jpg"
-];
-
-let matchNumber = 1;
-
-function showMatches() {
-
-    let first = matchNumber - 1;
-    let middle = matchNumber;
-    let last = matchNumber + 1;
-
-    if (first < 0) {
-        first = matches.length - 1;
-    }
-
-    if (last >= matches.length) {
-        last = 0;
-    }
-
-    document.getElementById("match1").src = matches[first];
-    document.getElementById("match2").src = matches[middle];
-    document.getElementById("match3").src = matches[last];
-}
-
-document.getElementById("matchLeft").addEventListener("click", function() {
-
-    matchNumber--;
-
-    if (matchNumber < 0) {
-        matchNumber = matches.length - 1;
-    }
-
-    showMatches();
-});
-
-document.getElementById("matchRight").addEventListener("click", function() {
-
-    matchNumber++;
-
-    if (matchNumber >= matches.length) {
-        matchNumber = 0;
-    }
-
-    showMatches();
-});
 
 let players = [
-    ["images/player1.jpg", "PLAYER 1", "GOALS: 5 | ASSISTS: 3"],
-    ["images/player2.jpg", "PLAYER 2", "GOALS: 3 | ASSISTS: 5"],
-    ["images/player3.jpg", "PLAYER 3", "GOALS: 7 | ASSISTS: 2"]
+    ["#8 Aiden Fung", "MIDFIELDER", "Goals: 0 | Assists: 0"],
+    ["#9 Jaden Misquith", "DEFENDER / MIDFIELDER", "Goals: 0 | Assists: 0"],
+    ["#10 Humberto Hernandez", "MIDFIELDER / FORWARD", "Goals: 0 | Assists: 2"],
+    ["#15 Christian Cuautle", "MIDFIELDER", "Goals: 0 | Assists: 0"],
+    ["#19 Max Golkov", "DEFENDER", "Goals: 0 | Assists: 0"],
+    ["#20 Ade Franklyn", "FORWARD", "Goals: 0 | Assists: 0"],
+    ["#21 Klodian Jaku", "MIDFIELDER", "Goals: 0 | Assists: 0"],
+    ["#27 Ryan Almeida", "MIDFIELDER / FORWARD", "Goals: 0 | Assists: 0"],
+    ["Amit Agnihotri", "DEFENDER", "Goals: 0 | Assists: 0"],
+    ["Anthony Ayoub", "DEFENDER / MIDFIELDER", "Goals: 0 | Assists: 0"],
+    ["Jayden Aziz", "MIDFIELDER / FORWARD", "Goals: 0 | Assists: 0"],
+    ["Hudson Bromberger", "MIDFIELDER / DEFENDER", "Goals: 0 | Assists: 0"],
+    ["Marvin Canaca", "MIDFIELDER", "Goals: 0 | Assists: 0"],
+    ["Izaak Dabby", "FORWARD / MIDFIELDER", "Goals: 0 | Assists: 0"],
+    ["Jacob Garcia Zepeda", "MIDFIELDER / FORWARD", "Goals: 0 | Assists: 0"],
+    ["James Iglesias", "DEFENDER", "Tackles: 0 | Games: 0"],
+    ["Marcel Kolodziej", "DEFENDER", "Tackles: 0 | Games: 0"],
+    ["Jael Lopez", "MIDFIELDER", "Goals: 0 | Assists: 0"],
+    ["Daniel Mejia-Sanchez", "GOALKEEPER", "Saves: 0 | Clean Sheets: 0"],
+    ["Anthony Menjivar Alas", "GOALKEEPER", "Saves: 0 | Clean Sheets: 0"],
+    ["Dylan Mijangos Jimenez", "DEFENDER", "Tackles: 0 | Games: 0"],
+    ["Alan Orozco", "DEFENDER", "Tackles: 0 | Games: 0"],
+    ["#00 Christian Rebelo", "GOALKEEPER", "Saves: 0 | Clean Sheets: 0"],
+    ["Noah Sharon", "MIDFIELDER / DEFENDER", "Goals: 0 | Assists: 0"]
 ];
 
-let playerNumber = 0;
+let page = 0;
 
 function showPlayers() {
 
-    let first = playerNumber;
-    let second = playerNumber + 1;
-    let third = playerNumber + 2;
+    let start = page * 3;
 
-    if (first >= players.length) {
-        first = 0;
+    for (let i = 0; i < 3; i++) {
+
+        let player = players[start + i];
+
+        if (player) {
+            document.getElementById("playerName" + (i + 1)).textContent = player[0];
+            document.getElementById("playerPosition" + (i + 1)).textContent = player[1];
+            document.getElementById("playerStats" + (i + 1)).textContent = player[2];
+        }
     }
 
-    if (second >= players.length) {
-        second = 0;
-    }
-
-    if (third >= players.length) {
-        third = 0;
-    }
-
-    document.getElementById("player1").src = players[first][0];
-    document.getElementById("playerName1").textContent = players[first][1];
-    document.getElementById("playerStats1").textContent = players[first][2];
-
-    document.getElementById("player2").src = players[second][0];
-    document.getElementById("playerName2").textContent = players[second][1];
-    document.getElementById("playerStats2").textContent = players[second][2];
-
-    document.getElementById("player3").src = players[third][0];
-    document.getElementById("playerName3").textContent = players[third][1];
-    document.getElementById("playerStats3").textContent = players[third][2];
+    document.getElementById("playerPage").textContent =
+        (page + 1) + " / " + Math.ceil(players.length / 3);
 }
 
-document.getElementById("playerLeft").addEventListener("click", function() {
+function nextPlayer() {
 
-    playerNumber--;
-
-    if (playerNumber < 0) {
-        playerNumber = players.length - 1;
+    if (page < Math.ceil(players.length / 3) - 1) {
+        page++;
+        showPlayers();
     }
+}
 
-    showPlayers();
-});
+function previousPlayer() {
 
-document.getElementById("playerRight").addEventListener("click", function() {
-
-    playerNumber++;
-
-    if (playerNumber >= players.length) {
-        playerNumber = 0;
+    if (page > 0) {
+        page--;
+        showPlayers();
     }
+}
 
-    showPlayers();
-});
+showPlayers();
 
-let media = [
-    "images/media1.jpg",
-    "images/media2.jpg"
-];
 
-let mediaNumber = 0;
+let mediaNumber = 1;
 
-function showMedia() {
-
-    document.getElementById("media1").src = media[mediaNumber];
+function nextMedia() {
 
     mediaNumber++;
 
-    if (mediaNumber >= media.length) {
-        mediaNumber = 0;
+    if (mediaNumber > 3) {
+        mediaNumber = 1;
     }
 
-    document.getElementById("media2").src = media[mediaNumber];
+    document.getElementById("media1").src =
+        "media" + mediaNumber + ".png";
 }
 
-document.getElementById("mediaLeft").addEventListener("click", function() {
+function previousMedia() {
 
     mediaNumber--;
 
-    if (mediaNumber < 0) {
-        mediaNumber = media.length - 1;
+    if (mediaNumber < 1) {
+        mediaNumber = 3;
     }
 
-    showMedia();
-});
+    document.getElementById("media1").src =
+        "media" + mediaNumber + ".png";
+}
 
-document.getElementById("mediaRight").addEventListener("click", function() {
 
-    mediaNumber++;
+let smallMediaNumber = 4;
 
-    if (mediaNumber >= media.length) {
-        mediaNumber = 0;
+function changeSmallMedia() {
+
+    document.getElementById("media2").src =
+        "media" + smallMediaNumber + ".png";
+
+    smallMediaNumber++;
+
+    if (smallMediaNumber > 6) {
+        smallMediaNumber = 4;
     }
+}
 
-    showMedia();
-});
+setInterval(changeSmallMedia, 3000);
